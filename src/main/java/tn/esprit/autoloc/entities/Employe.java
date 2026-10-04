@@ -2,6 +2,7 @@ package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tn.esprit.autoloc.enums.RoleEmploye;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder

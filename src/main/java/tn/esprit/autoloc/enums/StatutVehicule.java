@@ -1,4 +1,4 @@
-package tn.esprit.autoloc.entities;
+package tn.esprit.autoloc.enums;
 
 public enum StatutVehicule {
     DISPONIBLE,

@@ -2,6 +2,7 @@ package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tn.esprit.autoloc.enums.ModePaiement;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

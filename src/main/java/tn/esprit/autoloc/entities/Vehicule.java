@@ -2,6 +2,8 @@ package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tn.esprit.autoloc.enums.CategorieVehicule;
+import tn.esprit.autoloc.enums.StatutVehicule;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
