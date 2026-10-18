@@ -1,6 +1,7 @@
 package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -20,5 +21,6 @@ public class Client {
     private LocalDate dateInscription;
 
     @OneToMany(mappedBy = "client")
+    @JsonIgnore
     @Builder.Default private List<Reservation> reservations = new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import tn.esprit.autoloc.enums.CategorieVehicule;
 import tn.esprit.autoloc.enums.StatutVehicule;
@@ -26,14 +27,17 @@ public class Vehicule {
     private Agence agence;
 
     @OneToMany(mappedBy = "vehicule")
+    @JsonIgnore
     @Builder.Default private List<Maintenance> maintenances = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "vehicule_equipement",
             joinColumns = @JoinColumn(name = "vehicule_id"),
             inverseJoinColumns = @JoinColumn(name = "equipement_id"))
+    @JsonIgnore
     @Builder.Default private List<Equipement> equipements = new ArrayList<>();
 
     @OneToMany(mappedBy = "vehicule")
+    @JsonIgnore
     @Builder.Default private List<Reservation> reservations = new ArrayList<>();
 }

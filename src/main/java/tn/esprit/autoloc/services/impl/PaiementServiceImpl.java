@@ -3,21 +3,27 @@ package tn.esprit.autoloc.services.impl;
 import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.entities.Paiement;
 import tn.esprit.autoloc.repositories.PaiementRepository;
+import tn.esprit.autoloc.repositories.ContratRepository;
 import tn.esprit.autoloc.services.PaiementService;
 import java.util.List;
 
 @Service
 public class PaiementServiceImpl implements PaiementService {
     private final PaiementRepository paiementRepository;
-    public PaiementServiceImpl(PaiementRepository paiementRepository) {
+    private final ContratRepository contratRepository;
+
+    public PaiementServiceImpl(PaiementRepository paiementRepository, ContratRepository contratRepository) {
         this.paiementRepository = paiementRepository;
+        this.contratRepository = contratRepository;
     }
     @Override
     public Paiement ajouterPaiement(Paiement paiement) {
+        paiement.setContrat(contratRepository.getReferenceById(paiement.getContrat().getIdContrat()));
         return paiementRepository.save(paiement);
     }
     @Override
     public Paiement modifierPaiement(Paiement paiement) {
+        paiement.setContrat(contratRepository.getReferenceById(paiement.getContrat().getIdContrat()));
         return paiementRepository.save(paiement);
     }
     @Override

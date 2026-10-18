@@ -1,6 +1,7 @@
 package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import tn.esprit.autoloc.enums.StatutReservation;
 
@@ -19,5 +20,6 @@ public class Reservation {
     @ManyToOne(optional = false) @JoinColumn(name = "vehicule_id") private Vehicule vehicule;
 
     @OneToOne(mappedBy = "reservation")
+    @JsonIgnore
     private Contrat contrat;
 }

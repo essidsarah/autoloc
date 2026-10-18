@@ -1,6 +1,7 @@
 package tn.esprit.autoloc.entities;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -22,5 +23,6 @@ public class Contrat {
     private Reservation reservation;
 
     @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     @Builder.Default private List<Paiement> paiements = new ArrayList<>();
 }
