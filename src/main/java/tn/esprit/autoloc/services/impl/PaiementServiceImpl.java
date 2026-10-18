@@ -23,8 +23,15 @@ public class PaiementServiceImpl implements PaiementService {
     }
     @Override
     public Paiement modifierPaiement(Paiement paiement) {
-        paiement.setContrat(contratRepository.getReferenceById(paiement.getContrat().getIdContrat()));
-        return paiementRepository.save(paiement);
+        Paiement paiementExistant = paiementRepository.findById(paiement.getIdPaiement()).orElse(null);
+        if (paiementExistant == null) {
+            return null;
+        }
+        paiementExistant.setMontant(paiement.getMontant());
+        paiementExistant.setDatePaiement(paiement.getDatePaiement());
+        paiementExistant.setModePaiement(paiement.getModePaiement());
+        paiementExistant.setContrat(contratRepository.getReferenceById(paiement.getContrat().getIdContrat()));
+        return paiementRepository.save(paiementExistant);
     }
     @Override
     public void supprimerPaiement(Long idPaiement) {

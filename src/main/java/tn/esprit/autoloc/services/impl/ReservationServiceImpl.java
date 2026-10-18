@@ -27,9 +27,16 @@ public class ReservationServiceImpl implements ReservationService {
     }
     @Override
     public Reservation modifierReservation(Reservation reservation) {
-        reservation.setClient(clientRepository.getReferenceById(reservation.getClient().getIdClient()));
-        reservation.setVehicule(vehiculeRepository.getReferenceById(reservation.getVehicule().getIdVehicule()));
-        return reservationRepository.save(reservation);
+        Reservation reservationExistante = reservationRepository.findById(reservation.getIdReservation()).orElse(null);
+        if (reservationExistante == null) {
+            return null;
+        }
+        reservationExistante.setDateDebut(reservation.getDateDebut());
+        reservationExistante.setDateFin(reservation.getDateFin());
+        reservationExistante.setStatut(reservation.getStatut());
+        reservationExistante.setClient(clientRepository.getReferenceById(reservation.getClient().getIdClient()));
+        reservationExistante.setVehicule(vehiculeRepository.getReferenceById(reservation.getVehicule().getIdVehicule()));
+        return reservationRepository.save(reservationExistante);
     }
     @Override
     public void supprimerReservation(Long idReservation) {

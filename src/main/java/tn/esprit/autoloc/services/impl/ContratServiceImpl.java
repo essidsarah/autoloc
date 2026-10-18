@@ -23,8 +23,15 @@ public class ContratServiceImpl implements ContratService {
     }
     @Override
     public Contrat modifierContrat(Contrat contrat) {
-        contrat.setReservation(reservationRepository.getReferenceById(contrat.getReservation().getIdReservation()));
-        return contratRepository.save(contrat);
+        Contrat contratExistant = contratRepository.findById(contrat.getIdContrat()).orElse(null);
+        if (contratExistant == null) {
+            return null;
+        }
+        contratExistant.setDateSignature(contrat.getDateSignature());
+        contratExistant.setMontantTotal(contrat.getMontantTotal());
+        contratExistant.setValide(contrat.isValide());
+        contratExistant.setReservation(reservationRepository.getReferenceById(contrat.getReservation().getIdReservation()));
+        return contratRepository.save(contratExistant);
     }
     @Override
     public void supprimerContrat(Long idContrat) {
